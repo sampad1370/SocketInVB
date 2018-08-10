@@ -1,0 +1,12 @@
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\bin\Debug\VB.NetSide.exe.config
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\bin\Debug\VB.NetSide.exe
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\bin\Debug\VB.NetSide.pdb
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\bin\Debug\VB.NetSide.xml
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.vbprojAssemblyReference.cache
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.Form1.resources
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.Resources.resources
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.vbproj.GenerateResource.cache
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.vbproj.CoreCompileInputs.cache
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.exe
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.xml
+D:\Projects\Temp\SocketInVBAndJava\VB.NetSide\VB.NetSide\obj\Debug\VB.NetSide.pdb

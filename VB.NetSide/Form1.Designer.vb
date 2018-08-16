@@ -36,12 +36,15 @@ Partial Class Form1
 		Me.Label3 = New System.Windows.Forms.Label()
 		Me.data = New System.Windows.Forms.NumericUpDown()
 		Me.sendData = New System.Windows.Forms.Button()
+		Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+		Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.GroupBox1.SuspendLayout()
 		CType(Me.port, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox2.SuspendLayout()
 		Me.GroupBox5.SuspendLayout()
 		Me.GroupBox4.SuspendLayout()
 		CType(Me.data, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.MenuStrip1.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'Label1
@@ -119,9 +122,9 @@ Partial Class Form1
 		Me.GroupBox2.Controls.Add(Me.GroupBox4)
 		Me.GroupBox2.Controls.Add(Me.GroupBox1)
 		Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.GroupBox2.Location = New System.Drawing.Point(5, 5)
+		Me.GroupBox2.Location = New System.Drawing.Point(5, 29)
 		Me.GroupBox2.Name = "GroupBox2"
-		Me.GroupBox2.Size = New System.Drawing.Size(454, 186)
+		Me.GroupBox2.Size = New System.Drawing.Size(474, 187)
 		Me.GroupBox2.TabIndex = 4
 		Me.GroupBox2.TabStop = False
 		Me.GroupBox2.Text = "Connect To Server"
@@ -131,7 +134,7 @@ Partial Class Form1
 		Me.GroupBox5.Controls.Add(Me.recievedDataList)
 		Me.GroupBox5.Location = New System.Drawing.Point(192, 19)
 		Me.GroupBox5.Name = "GroupBox5"
-		Me.GroupBox5.Size = New System.Drawing.Size(256, 158)
+		Me.GroupBox5.Size = New System.Drawing.Size(276, 158)
 		Me.GroupBox5.TabIndex = 1
 		Me.GroupBox5.TabStop = False
 		Me.GroupBox5.Text = "Recieved Data:"
@@ -145,7 +148,7 @@ Partial Class Form1
 		Me.recievedDataList.ReadOnly = True
 		Me.recievedDataList.ShortcutsEnabled = False
 		Me.recievedDataList.ShowSelectionMargin = True
-		Me.recievedDataList.Size = New System.Drawing.Size(250, 139)
+		Me.recievedDataList.Size = New System.Drawing.Size(270, 139)
 		Me.recievedDataList.TabIndex = 5
 		Me.recievedDataList.Text = ""
 		'
@@ -189,16 +192,33 @@ Partial Class Form1
 		Me.sendData.Text = "Send"
 		Me.sendData.UseVisualStyleBackColor = True
 		'
+		'MenuStrip1
+		'
+		Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutUsToolStripMenuItem})
+		Me.MenuStrip1.Location = New System.Drawing.Point(5, 5)
+		Me.MenuStrip1.Name = "MenuStrip1"
+		Me.MenuStrip1.Size = New System.Drawing.Size(474, 24)
+		Me.MenuStrip1.TabIndex = 5
+		Me.MenuStrip1.Text = "MenuStrip1"
+		'
+		'AboutUsToolStripMenuItem
+		'
+		Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
+		Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
+		Me.AboutUsToolStripMenuItem.Text = "About Us"
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(464, 196)
+		Me.ClientSize = New System.Drawing.Size(484, 221)
 		Me.Controls.Add(Me.GroupBox2)
+		Me.Controls.Add(Me.MenuStrip1)
+		Me.MainMenuStrip = Me.MenuStrip1
 		Me.MaximizeBox = False
-		Me.MaximumSize = New System.Drawing.Size(480, 235)
+		Me.MaximumSize = New System.Drawing.Size(500, 260)
 		Me.MinimizeBox = False
-		Me.MinimumSize = New System.Drawing.Size(480, 235)
+		Me.MinimumSize = New System.Drawing.Size(500, 260)
 		Me.Name = "Form1"
 		Me.Padding = New System.Windows.Forms.Padding(5)
 		Me.Text = "Form1"
@@ -210,7 +230,10 @@ Partial Class Form1
 		Me.GroupBox4.ResumeLayout(False)
 		Me.GroupBox4.PerformLayout()
 		CType(Me.data, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.MenuStrip1.ResumeLayout(False)
+		Me.MenuStrip1.PerformLayout()
 		Me.ResumeLayout(False)
+		Me.PerformLayout()
 
 	End Sub
 
@@ -228,4 +251,6 @@ Partial Class Form1
 	Friend WithEvents data As NumericUpDown
 	Friend WithEvents sendData As Button
 	Friend WithEvents disconnect As Button
+	Friend WithEvents MenuStrip1 As MenuStrip
+	Friend WithEvents AboutUsToolStripMenuItem As ToolStripMenuItem
 End Class

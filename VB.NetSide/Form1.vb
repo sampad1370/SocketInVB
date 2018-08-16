@@ -19,6 +19,7 @@ Public Class Form1
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		disconnect.Enabled = False
 		sendData.Enabled = False
+		data.Enabled = False
 	End Sub
 
 	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles connect.Click
@@ -43,6 +44,7 @@ Public Class Form1
 			disconnect.Enabled = False
 			connect.Enabled = True
 			sendData.Enabled = False
+			data.Enabled = False
 			client.Close()
 			client = Nothing
 		End Sub
@@ -55,6 +57,7 @@ Public Class Form1
 			disconnect.Enabled = True
 			connect.Enabled = False
 			sendData.Enabled = True
+			data.Enabled = True
 		End Sub
 		)
 	End Function
@@ -74,6 +77,10 @@ Public Class Form1
 
 	Private Sub disconnect_Click(sender As Object, e As EventArgs) Handles disconnect.Click
 		client.Disconnect()
+	End Sub
+
+	Private Sub AboutUsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutUsToolStripMenuItem.Click
+		Process.Start("https://github.com/sampad1370/SocketInVB")
 	End Sub
 End Class
 

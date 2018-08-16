@@ -27,6 +27,7 @@ Partial Class Form1
 		Me.Label2 = New System.Windows.Forms.Label()
 		Me.GroupBox1 = New System.Windows.Forms.GroupBox()
 		Me.port = New System.Windows.Forms.NumericUpDown()
+		Me.disconnect = New System.Windows.Forms.Button()
 		Me.connect = New System.Windows.Forms.Button()
 		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
 		Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -63,7 +64,7 @@ Partial Class Form1
 		'Label2
 		'
 		Me.Label2.AutoSize = True
-		Me.Label2.Location = New System.Drawing.Point(-3, 49)
+		Me.Label2.Location = New System.Drawing.Point(1, 49)
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(29, 13)
 		Me.Label2.TabIndex = 0
@@ -73,12 +74,13 @@ Partial Class Form1
 		'
 		Me.GroupBox1.Controls.Add(Me.port)
 		Me.GroupBox1.Controls.Add(Me.ipAddress)
+		Me.GroupBox1.Controls.Add(Me.disconnect)
 		Me.GroupBox1.Controls.Add(Me.connect)
 		Me.GroupBox1.Controls.Add(Me.Label1)
 		Me.GroupBox1.Controls.Add(Me.Label2)
 		Me.GroupBox1.Location = New System.Drawing.Point(6, 19)
 		Me.GroupBox1.Name = "GroupBox1"
-		Me.GroupBox1.Size = New System.Drawing.Size(143, 118)
+		Me.GroupBox1.Size = New System.Drawing.Size(180, 105)
 		Me.GroupBox1.TabIndex = 2
 		Me.GroupBox1.TabStop = False
 		Me.GroupBox1.Text = "Server Address:"
@@ -93,11 +95,20 @@ Partial Class Form1
 		Me.port.TabIndex = 3
 		Me.port.Value = New Decimal(New Integer() {1, 0, 0, 0})
 		'
+		'disconnect
+		'
+		Me.disconnect.Location = New System.Drawing.Point(84, 76)
+		Me.disconnect.Name = "disconnect"
+		Me.disconnect.Size = New System.Drawing.Size(90, 23)
+		Me.disconnect.TabIndex = 3
+		Me.disconnect.Text = "Disconnect"
+		Me.disconnect.UseVisualStyleBackColor = True
+		'
 		'connect
 		'
-		Me.connect.Location = New System.Drawing.Point(32, 73)
+		Me.connect.Location = New System.Drawing.Point(9, 76)
 		Me.connect.Name = "connect"
-		Me.connect.Size = New System.Drawing.Size(100, 23)
+		Me.connect.Size = New System.Drawing.Size(69, 23)
 		Me.connect.TabIndex = 3
 		Me.connect.Text = "Connect"
 		Me.connect.UseVisualStyleBackColor = True
@@ -110,7 +121,7 @@ Partial Class Form1
 		Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.GroupBox2.Location = New System.Drawing.Point(5, 5)
 		Me.GroupBox2.Name = "GroupBox2"
-		Me.GroupBox2.Size = New System.Drawing.Size(444, 231)
+		Me.GroupBox2.Size = New System.Drawing.Size(454, 186)
 		Me.GroupBox2.TabIndex = 4
 		Me.GroupBox2.TabStop = False
 		Me.GroupBox2.Text = "Connect To Server"
@@ -118,9 +129,9 @@ Partial Class Form1
 		'GroupBox5
 		'
 		Me.GroupBox5.Controls.Add(Me.recievedDataList)
-		Me.GroupBox5.Location = New System.Drawing.Point(155, 19)
+		Me.GroupBox5.Location = New System.Drawing.Point(192, 19)
 		Me.GroupBox5.Name = "GroupBox5"
-		Me.GroupBox5.Size = New System.Drawing.Size(282, 203)
+		Me.GroupBox5.Size = New System.Drawing.Size(256, 158)
 		Me.GroupBox5.TabIndex = 1
 		Me.GroupBox5.TabStop = False
 		Me.GroupBox5.Text = "Recieved Data:"
@@ -128,10 +139,13 @@ Partial Class Form1
 		'recievedDataList
 		'
 		Me.recievedDataList.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.recievedDataList.EnableAutoDragDrop = True
 		Me.recievedDataList.Location = New System.Drawing.Point(3, 16)
 		Me.recievedDataList.Name = "recievedDataList"
 		Me.recievedDataList.ReadOnly = True
-		Me.recievedDataList.Size = New System.Drawing.Size(276, 184)
+		Me.recievedDataList.ShortcutsEnabled = False
+		Me.recievedDataList.ShowSelectionMargin = True
+		Me.recievedDataList.Size = New System.Drawing.Size(250, 139)
 		Me.recievedDataList.TabIndex = 5
 		Me.recievedDataList.Text = ""
 		'
@@ -140,9 +154,9 @@ Partial Class Form1
 		Me.GroupBox4.Controls.Add(Me.Label3)
 		Me.GroupBox4.Controls.Add(Me.data)
 		Me.GroupBox4.Controls.Add(Me.sendData)
-		Me.GroupBox4.Location = New System.Drawing.Point(8, 143)
+		Me.GroupBox4.Location = New System.Drawing.Point(6, 130)
 		Me.GroupBox4.Name = "GroupBox4"
-		Me.GroupBox4.Size = New System.Drawing.Size(141, 81)
+		Me.GroupBox4.Size = New System.Drawing.Size(180, 47)
 		Me.GroupBox4.TabIndex = 0
 		Me.GroupBox4.TabStop = False
 		Me.GroupBox4.Text = "Send Data"
@@ -168,9 +182,9 @@ Partial Class Form1
 		'
 		'sendData
 		'
-		Me.sendData.Location = New System.Drawing.Point(6, 49)
+		Me.sendData.Location = New System.Drawing.Point(115, 16)
 		Me.sendData.Name = "sendData"
-		Me.sendData.Size = New System.Drawing.Size(117, 23)
+		Me.sendData.Size = New System.Drawing.Size(57, 23)
 		Me.sendData.TabIndex = 0
 		Me.sendData.Text = "Send"
 		Me.sendData.UseVisualStyleBackColor = True
@@ -179,12 +193,12 @@ Partial Class Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(454, 241)
+		Me.ClientSize = New System.Drawing.Size(464, 196)
 		Me.Controls.Add(Me.GroupBox2)
 		Me.MaximizeBox = False
-		Me.MaximumSize = New System.Drawing.Size(470, 280)
+		Me.MaximumSize = New System.Drawing.Size(480, 235)
 		Me.MinimizeBox = False
-		Me.MinimumSize = New System.Drawing.Size(470, 280)
+		Me.MinimumSize = New System.Drawing.Size(480, 235)
 		Me.Name = "Form1"
 		Me.Padding = New System.Windows.Forms.Padding(5)
 		Me.Text = "Form1"
@@ -213,4 +227,5 @@ Partial Class Form1
 	Friend WithEvents Label3 As Label
 	Friend WithEvents data As NumericUpDown
 	Friend WithEvents sendData As Button
+	Friend WithEvents disconnect As Button
 End Class

@@ -10,12 +10,18 @@ Public Class Form1
 	Private client As AsynchronousClient = Nothing
 	Private address As IPAddress = Nothing
 
+	Private Sub Log(message As String)
+		recievedDataList.Text += message
+		recievedDataList.SelectionStart = recievedDataList.TextLength
+		recievedDataList.ScrollToCaret()
+	End Sub
+
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		disconnect.Enabled = False
+		sendData.Enabled = False
 	End Sub
 
 	Private Sub Button1_Click(sender As Object, e As EventArgs) Handles connect.Click
-
-
 		If (ipAddress.Text IsNot "") Then
 			If (System.Net.IPAddress.TryParse(ipAddress.Text, address)) Then
 				If (IsNothing(client)) Then
@@ -24,21 +30,50 @@ Public Class Form1
 				client.Connect(address, port.Value)
 				AddHandler client.ReceivedData, AddressOf onRecievedData
 				AddHandler client.Loged, AddressOf onLogEvent
+				AddHandler client.Connected, AddressOf onConnect
+				AddHandler client.Disconnected, AddressOf onDisconnect
+
 			End If
 		End If
 	End Sub
 
+	Private Sub onDisconnect()
+		Me.BeginInvoke(
+		Sub()
+			disconnect.Enabled = False
+			connect.Enabled = True
+			sendData.Enabled = False
+			client.Close()
+			client = Nothing
+		End Sub
+		)
+	End Sub
+
+	Private Function onConnect() As Object
+		Me.BeginInvoke(
+		Sub()
+			disconnect.Enabled = True
+			connect.Enabled = False
+			sendData.Enabled = True
+		End Sub
+		)
+	End Function
+
 	Private Sub onLogEvent(message As String)
-		Me.BeginInvoke(Sub() recievedDataList.Text += message)
+		Me.BeginInvoke(Sub() Log(message))
 	End Sub
 
 	Private Sub onRecievedData(data As String)
-		Me.BeginInvoke(Sub() recievedDataList.Text += data)
+		Me.BeginInvoke(Sub() Log(data))
 	End Sub
 
 	Private Sub SendData_Click(sender As Object, e As EventArgs) Handles sendData.Click
 		Dim dataInt As Int32 = data.Value
 		client.Send(dataInt.ToString())
+	End Sub
+
+	Private Sub disconnect_Click(sender As Object, e As EventArgs) Handles disconnect.Click
+		client.Disconnect()
 	End Sub
 End Class
 
@@ -63,6 +98,8 @@ Public Class AsynchronousClient
 	' ManualResetEvent instances signal completion.  
 	Public connectDone As ManualResetEvent = New ManualResetEvent(False)
 
+	Public disconnectDone As ManualResetEvent = New ManualResetEvent(False)
+
 	Public sendDone As ManualResetEvent = New ManualResetEvent(False)
 
 	Public receiveDone As ManualResetEvent = New ManualResetEvent(False)
@@ -75,9 +112,14 @@ Public Class AsynchronousClient
 
 	Public Event ReceivedData(data As String)
 	Public Event Loged(message As String)
+	Public Event Connected()
+	Public Event Disconnected()
 
 	Public Sub New(socketType As SocketType, protocolType As ProtocolType)
 		client = New Socket(socketType, protocolType)
+
+		client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, True)
+
 
 	End Sub
 
@@ -87,14 +129,38 @@ Public Class AsynchronousClient
 			Dim client As Socket = CType(ar.AsyncState, Socket)
 			' Complete the connection.  
 			client.EndConnect(ar)
-			RaiseEvent Loged("Socket connected to " + client.RemoteEndPoint.ToString())
+			RaiseEvent Loged("Socket connected to " + client.RemoteEndPoint.ToString() + vbCrLf)
 			' Signal that the connection has been made.  
 			connectDone.Set()
+			RaiseEvent Connected()
 			Receive(client)
 		Catch e As Exception
 			RaiseEvent Loged(e.ToString)
 		End Try
 
+	End Sub
+
+	Private Sub DisconnectCallback(ar As IAsyncResult)
+		Try
+			' Retrieve the socket from the state object.  
+			Dim client As Socket = CType(ar.AsyncState, Socket)
+			client.EndDisconnect(ar)
+			disconnectDone.[Set]()
+			RaiseEvent Loged("Socket disconnected to " + client.RemoteEndPoint.ToString() + vbCrLf)
+			RaiseEvent Disconnected()
+			' Signal that the connection has been made.
+		Catch e As Exception
+			RaiseEvent Loged(e.ToString)
+		End Try
+	End Sub
+
+	Public Sub Connect(ipAddress As IPAddress, port As Int32)
+		client.BeginConnect(ipAddress, port, New AsyncCallback(AddressOf ConnectCallback), client)
+	End Sub
+
+	Public Sub Disconnect()
+		client.Shutdown(SocketShutdown.Both)
+		client.BeginDisconnect(True, New AsyncCallback(AddressOf DisconnectCallback), client)
 	End Sub
 
 	Private Sub Receive(ByVal client As Socket)
@@ -164,16 +230,16 @@ Public Class AsynchronousClient
 
 	End Sub
 
-	Public Sub Connect(ipAddress As IPAddress, port As Int32)
-		client.BeginConnect(ipAddress, port, New AsyncCallback(AddressOf ConnectCallback), client)
-	End Sub
-
 	Public Sub Send(ByVal data As String)
 		' Convert the string data to byte data using ASCII encoding.  
 		Dim byteData() As Byte = Encoding.ASCII.GetBytes(data & vbLf)
 		' Begin sending the data to the remote device.  
 		'client.BeginSend(byteData, 0, byteData.Length, 0, New AsyncCallback(AddressOf SendCallback), client)
 		client.Send(byteData)
+	End Sub
+
+	Public Sub Close()
+		client.Close()
 	End Sub
 End Class
 
